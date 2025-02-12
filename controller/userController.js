@@ -151,8 +151,9 @@ const updateUser = async (req, res) => {
            res.status(200).json({message: "user deleted successfully"});
         } catch (error) {
             console.error("Error deleting user", error);
-            res.status(500).json({message: "Error deleting user", error: error.message});
+            res.status(500).json({message: "Error deleting existing", error: error.message});
         }
+
     };
 
     //get all users
