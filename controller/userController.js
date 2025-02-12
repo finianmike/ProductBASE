@@ -4,11 +4,11 @@ const User = require("../module/userModule.js");
 
 const registerUser = async (req, res) => {
     try {
-       let {name, email, userName, password, phoneNumber, sex, marritalStatus} = req.body;
+       let {firstName, lastName, email, userName, password, phoneNumber, sex, marritalStatus} = req.body;
 
 //VALIDATION REQUIRED FIELDS
 
-       if (!name || !email || !userName || !password || !phoneNumber || !sex || !marritalStatus)
+       if (!firstName || !lastName || !email || !userName || !password || !phoneNumber || !sex || !marritalStatus)
         return res.status(400).json({message: "ALL FIELDS MUST BE COMPLETED"});
 
 //HASH THE PASSWORD
@@ -17,7 +17,7 @@ const hashedPassword = await bcrypt.hash(password, salt);
 
 //save user in database
 const newUser = new User({
-    name, email, userName, password: hashedPassword, phoneNumber, sex, marritalStatus,
+    firstName, lastName, email, userName, password: hashedPassword, phoneNumber, sex, marritalStatus,
 })
 const registerUser = await newUser.save();
 res.status(201).json(registerUser);
